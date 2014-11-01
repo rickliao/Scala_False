@@ -1,12 +1,15 @@
-class False {
-	def +(a: Int) {
-		println(a);
+object False {
+	def main(args: Array[String]) {
+		False START "12+";
 	}
+
+	def START(prog: String) = {
+		var progAr = prog.toCharArray;
+		for(i:Int <- 0 until progAr.length){
+			println(progAr(i));
+		}
+	}
+
+	
 	
 }
-object False{
-def main(args: Array[String]) {
-		var obj :False= new False();
-		obj.+ (1);
-	}}
-//https://github.com/RyanHolstien/False
