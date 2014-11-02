@@ -2,7 +2,7 @@ import scala.collection.mutable.Stack
 
 object False {
 	def main(args: Array[String]) {
-		False START "12_ 4 89 1ø";
+		False START "12_ 4 =~0|";
 	}
 
 	//The main prog
@@ -21,6 +21,7 @@ object False {
 				i = i + strNum.length-1;
 			}
 			cur match {
+				//Arithmetic
 				case '_' => stack.push(-1 * stack.pop)
 				case '+' => stack.push(stack.pop + stack.pop)
 				case '-' => {
@@ -32,6 +33,44 @@ object False {
 					swap
 					stack.push(stack.pop / stack.pop)
 				}
+				//conditional
+				case '=' => {
+					if(stack.pop == stack.pop) 
+						stack.push(-1);
+					else 
+						stack.push(0);
+				}
+				case '~' => {
+					if(stack.pop == 0) 
+						stack.push(-1);
+					else 
+						stack.push(0);
+				}
+				case '>' => {
+					val a = stack.pop;
+					val b = stack.pop;
+					if(b > a) 
+						stack.push(-1);
+					else 
+						stack.push(0);
+				}
+				case '&' => {
+					val a = stack.pop;
+					val b = stack.pop;
+					if(a == 0 || b == 0) 
+						stack.push(0);
+					else 
+						stack.push(-1);
+				}
+				case '|' => {
+					val a = stack.pop;
+					val b = stack.pop;
+					if(a == -1 || b == -1) 
+						stack.push(-1);
+					else 
+						stack.push(0);
+				}
+				//stack operations
 				case '$' => stack.push(stack.top)
 				case '%' => stack.pop
 				case '\\' => swap
